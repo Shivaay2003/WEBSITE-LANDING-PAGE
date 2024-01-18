@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Navigation Menu</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            text-align: right;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: background 0.5s ease-in-out;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 18px 20px;
+            display: inline-block;
+            font-size: 35px;
+            transition: 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #34f0fd;
+            color: #080808;
+            opacity: 0.8;
+            border-radius: 8px;
+        }
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar" id="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="content">
+        <!-- Your page content goes here -->
+        <section id="home">
+            <h2>Home Section</h2>
+            <!-- Your home section content -->
+        </section>
+        <section id="about">
+            <h2>About Section</h2>
+            <!-- Your about section content -->
+        </section>
+        <section id="services">
+            <h2>Services Section</h2>
+            <!-- Your services section content -->
+        </section>
+        <section id="contact">
+            <h2>Contact Section</h2>
+            <!-- Your contact section content -->
+        </section>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+            navbar.style.background = '#2c3e50';
+        } else {
+            navbar.style.background = 'linear-gradient(to right, #4b6cb7, #182848)';
+        }
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                const targetPosition = targetElement.offsetTop - navbar.offsetHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
+</script>
+
+</html>
